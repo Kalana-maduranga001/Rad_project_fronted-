@@ -6,7 +6,7 @@ import { refreshTokens } from "./auth"
 
 const api = axios.create({
 //   baseURL: "https://rad-71-deploy-be.vercel.app/api/v1"
-  baseURL: "http://localhost:5000/api/v1"
+  baseURL: "https://rad-project-backend.vercel.app/api/v1"
 })
 
 const PUBLIC_ENDPOINTS = ["/auth/login", "/auth/register"]
