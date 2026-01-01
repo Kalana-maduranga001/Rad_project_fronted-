@@ -47,6 +47,8 @@ export default function AdminProducts() {
       const res = await getProducts(page, 10)
       setProducts(res.data)
       setTotalPages(res.totalPages)
+    } catch (err) {
+      console.error(err)
     } finally {
       setLoading(false)
     }
@@ -56,32 +58,46 @@ export default function AdminProducts() {
     fetchProducts()
   }, [page])
 
-  const buildFormData = () => {
+  const buildFormData = (includeImages = true) => {
     const fd = new FormData()
     Object.entries(form).forEach(([k, v]) => fd.append(k, v))
-    if (images) Array.from(images).forEach((img) => fd.append("images", img))
+    if (includeImages && images) {
+      Array.from(images).forEach((img) => fd.append("images", img))
+    }
     return fd
   }
 
   const handleCreate = async () => {
-    if (!images || !form.gender || !form.category) {
+    if (!images || images.length === 0 || !form.gender || !form.category) {
       alert("Gender, Category and at least 1 image are required")
       return
     }
 
-    await createProduct(buildFormData())
-    setShowAddModal(false)
-    setForm({
-      title: "",
-      description: "",
-      category: "",
-      gender: "",
-      size: "",
-      price: "",
-      stock: "",
-    })
-    setImages(null)
-    fetchProducts()
+    try {
+      await createProduct(buildFormData(true))
+
+      setForm({
+        title: "",
+        description: "",
+        category: "",
+        gender: "",
+        size: "",
+        price: "",
+        stock: "",
+      })
+      setImages(null)
+
+      const fileInput = document.getElementById(
+        "product-images"
+      ) as HTMLInputElement
+      if (fileInput) fileInput.value = ""
+
+      setShowAddModal(false)
+      fetchProducts()
+    } catch (err) {
+      console.error(err)
+      alert("Failed to create product")
+    }
   }
 
   const handleOpenEdit = (p: ProductType) => {
@@ -101,16 +117,31 @@ export default function AdminProducts() {
 
   const handleUpdate = async () => {
     if (!editingProductId) return
-    await updateProduct(editingProductId, buildFormData())
-    setShowEditModal(false)
-    setEditingProductId(null)
-    fetchProducts()
+
+    try {
+      await updateProduct(
+        editingProductId,
+        buildFormData(images !== null)
+      )
+      setShowEditModal(false)
+      setEditingProductId(null)
+      fetchProducts()
+    } catch (err) {
+      console.error(err)
+      alert("Failed to update product")
+    }
   }
 
   const handleDelete = async (id: string) => {
     if (!confirm("Delete this product?")) return
-    await deleteProduct(id)
-    fetchProducts()
+
+    try {
+      await deleteProduct(id)
+      fetchProducts()
+    } catch (err) {
+      console.error(err)
+      alert("Failed to delete product")
+    }
   }
 
   return (
@@ -136,7 +167,9 @@ export default function AdminProducts() {
                 className="h-40 w-full object-cover rounded"
               />
               <h2 className="font-semibold mt-2">{p.title}</h2>
-              <p className="text-sm">{p.category} · {p.gender}</p>
+              <p className="text-sm">
+                {p.category} · {p.gender}
+              </p>
               <p className="font-bold">Rs. {p.price}</p>
 
               <div className="flex justify-between mt-3">
@@ -158,7 +191,28 @@ export default function AdminProducts() {
         </div>
       )}
 
-      {/* ADD / EDIT MODALS USE SAME FORM */}
+      {/* PAGINATION */}
+      <div className="flex justify-center gap-3 mt-6">
+        <button
+          disabled={page === 1}
+          onClick={() => setPage((p) => p - 1)}
+          className="px-3 py-1 bg-gray-300 rounded disabled:bg-gray-200"
+        >
+          Prev
+        </button>
+        <span className="font-semibold">
+          {page} / {totalPages}
+        </span>
+        <button
+          disabled={page === totalPages}
+          onClick={() => setPage((p) => p + 1)}
+          className="px-3 py-1 bg-gray-300 rounded disabled:bg-gray-200"
+        >
+          Next
+        </button>
+      </div>
+
+      {/* ADD / EDIT MODAL */}
       {(showAddModal || showEditModal) && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
           <div className="bg-white p-6 rounded w-96 space-y-3">
@@ -166,14 +220,18 @@ export default function AdminProducts() {
               className="border p-2 w-full"
               placeholder="Title"
               value={form.title}
-              onChange={(e) => setForm({ ...form, title: e.target.value })}
+              onChange={(e) =>
+                setForm({ ...form, title: e.target.value })
+              }
             />
 
             <textarea
               className="border p-2 w-full"
               placeholder="Description"
               value={form.description}
-              onChange={(e) => setForm({ ...form, description: e.target.value })}
+              onChange={(e) =>
+                setForm({ ...form, description: e.target.value })
+              }
             />
 
             <select
@@ -185,7 +243,9 @@ export default function AdminProducts() {
             >
               <option value="">Select Gender</option>
               {GENDERS.map((g) => (
-                <option key={g} value={g}>{g}</option>
+                <option key={g} value={g}>
+                  {g}
+                </option>
               ))}
             </select>
 
@@ -198,7 +258,9 @@ export default function AdminProducts() {
             >
               <option value="">Select Category</option>
               {CATEGORIES.map((c) => (
-                <option key={c} value={c}>{c}</option>
+                <option key={c} value={c}>
+                  {c}
+                </option>
               ))}
             </select>
 
@@ -206,7 +268,9 @@ export default function AdminProducts() {
               className="border p-2 w-full"
               placeholder="Size"
               value={form.size}
-              onChange={(e) => setForm({ ...form, size: e.target.value })}
+              onChange={(e) =>
+                setForm({ ...form, size: e.target.value })
+              }
             />
 
             <input
@@ -214,7 +278,9 @@ export default function AdminProducts() {
               placeholder="Price"
               type="number"
               value={form.price}
-              onChange={(e) => setForm({ ...form, price: e.target.value })}
+              onChange={(e) =>
+                setForm({ ...form, price: e.target.value })
+              }
             />
 
             <input
@@ -222,10 +288,13 @@ export default function AdminProducts() {
               placeholder="Stock"
               type="number"
               value={form.stock}
-              onChange={(e) => setForm({ ...form, stock: e.target.value })}
+              onChange={(e) =>
+                setForm({ ...form, stock: e.target.value })
+              }
             />
 
             <input
+              id="product-images"
               type="file"
               multiple
               className="border p-2 w-full"
