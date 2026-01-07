@@ -18,6 +18,9 @@ const Checkout = lazy(() => import("../pages/Checkout"))
 // const Post = lazy(() => import("../pages/Post"))
 // const MyPost = lazy(() => import("../pages/MyPost"))
 
+const About = lazy(() => import("../pages/About"))
+const Contact = lazy(() => import("../pages/Contact"))
+
 type RequireAuthTypes = { children: ReactNode; roles?: string[] }
 
 const RequireAuth = ({ children, roles }: RequireAuthTypes) => {
@@ -61,6 +64,9 @@ export default function Router() {
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/products" element={<Products />} />
+
+            <Route path="/about" element={<About />}/>
+            <Route path="/contact" element={<Contact />}/>
 
             {/* User Dashboard */}
             <Route
