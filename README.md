@@ -1,109 +1,167 @@
-👕 Clothing Brand Store – Frontend
 
-A modern, responsive e-commerce frontend for a clothing brand, built using React + TypeScript as part of the Rapid Application Development (RAD) coursework.
-The application focuses on product discovery, size selection, cart management, and a smooth shopping experience.
+# 👕 Clothing Brand Store – Frontend
 
-🌟 Features
-User Features
+A **modern, responsive e-commerce frontend** for a clothing brand, built using **React + TypeScript** as part of the **Rapid Application Development (RAD)** coursework.
+This application delivers a smooth and intuitive shopping experience with a strong focus on **product discovery, size selection, cart management, and usability**.
 
-Modern landing page with brand-focused UI
+> 🎯 Designed to simulate a real-world online clothing store with scalable architecture and clean UI principles.
 
-Product listing with categories & gender filters
+---
 
-Product size selection (S, M, L, XL, etc.)
+## 🌟 Key Features
 
-Add to cart & cart management
+### 🧑‍💻 User Features
 
-User authentication (login & register)
+* ✨ **Elegant Landing Page** with brand-focused design
+* 🛍️ **Product Listing** with category & gender-based filtering
+* 📏 **Product Size Selection** (S, M, L, XL, etc.)
+* 🛒 **Shopping Cart Management**
 
-Order placement workflow
+  * Add / remove products
+  * Update quantities
+* 🔐 **User Authentication**
 
-Responsive design (mobile, tablet & desktop)
+  * Secure login & registration
+* 📦 **Order Placement Workflow**
+* 📱 **Fully Responsive Design**
 
-Admin Features
+  * Optimized for mobile, tablet, and desktop
 
-View all orders in admin dashboard
+---
 
-Order status management
+### 🛠️ Admin Features
 
-Product and inventory visibility
+* 📊 **Admin Orders Dashboard**
+* 🔄 **Order Status Management**
+* 👕 **Product & Inventory Visibility**
+* 📈 Structured UI for future admin feature expansion
 
-🛠️ Technologies Used
+---
 
-React 18 with TypeScript
+## 🛠️ Technologies Used
 
-Vite – fast build & development tool
+### Frontend Stack
 
-Tailwind CSS – utility-first styling
+* **React 18** with **TypeScript** – scalable UI with type safety
+* **Vite** – fast development & optimized builds
+* **Tailwind CSS** – modern, utility-first styling
+* **Redux Toolkit** – global state management
+* **React Router v6** – client-side routing
+* **Axios** – REST API communication
 
-Redux Toolkit – global state management
+### Development Tools
 
-React Router v6 – client-side routing
+* **ESLint** – maintain code quality
+* **Prettier** – consistent code formatting
 
-Axios – API communication
+---
 
-ESLint & Prettier – code quality
+## 📸 Screenshots
 
-📸 Screenshots
+📷 *Screenshots should be added to improve project presentation on GitHub*
 
-Home Page – Featured clothing collections
+* 🏠 Home Page – Featured clothing collections
+* 🛍️ Products Page – Category & size-based browsing
+* 🛒 Cart Page – Selected items and checkout preview
+* 🔐 Authentication – Login & Register pages
+* 📊 Admin Orders Dashboard
 
-Products Page – Category & size-based browsing
+---
 
-Cart Page – Selected items and checkout preview
+## 🚀 Setup & Run Instructions
 
-Authentication – Login & Register pages
+### 1️⃣ Clone the Repository
 
-Admin Orders Dashboard
-
-(Add screenshots in GitHub for better presentation)
-
-🚀 Setup & Run Instructions
-1️⃣ Clone the repository
+```bash
 git clone https://github.com/Kalana-maduranga001/Rad_project_fronted-.git
 cd Rad_project_fronted-
+```
 
-2️⃣ Install dependencies
+### 2️⃣ Install Dependencies
+
+```bash
 npm install
+```
 
-3️⃣ Configure environment variables
+### 3️⃣ Configure Environment Variables
 
-Create a .env file in the root directory:
+Create a `.env` file in the root directory:
 
+```env
 VITE_API_URL=http://localhost:5000/api
+```
 
-4️⃣ Start development server
+### 4️⃣ Start Development Server
+
+```bash
 npm run dev
+```
 
+📍 Application will be available at:
+**[http://localhost:5173](http://localhost:5173)**
 
-📍 Frontend will be available at:
-http://localhost:5173
+---
 
-📁 Project Structure
+## 📁 Project Structure
+
+```
 src/
  ├── components/        # Reusable UI components
  ├── pages/             # Page-level components
  ├── redux/             # Redux slices & store
- ├── services/          # API service files
- ├── context/           # Cart & auth context
- ├── assets/            # Images & static files
- ├── App.tsx
- └── main.tsx
+ ├── services/          # API service handlers
+ ├── context/           # Cart & authentication context
+ ├── assets/            # Images & static resources
+ ├── App.tsx            # Main app component
+ └── main.tsx           # Application entry point
+```
 
-📌 Notes
+---
 
-This frontend consumes REST APIs from the Clothing Store backend
+## 🔐 Application Architecture
 
-State management handled using Redux Toolkit
+* **Component-based design** for reusability
+* **Redux Toolkit** for predictable state management
+* **REST API integration** with backend services
+* **Separation of concerns** for scalability
+* **Responsive-first approach** for better UX
 
-Fully responsive and scalable UI architecture
+---
 
-👨‍💻 Author
+## 📌 Notes
 
-Kalana Maduranga
+* This frontend consumes REST APIs from the **Clothing Brand Store Backend**
+* Authentication and cart state are handled efficiently
+* Designed following **RAD principles**
+* Built with future enhancements in mind (payments, admin analytics, wishlists)
+
+---
+
+## 🚀 Future Enhancements
+
+* 💳 Online payment gateway integration
+* ❤️ Wishlist functionality
+* 📦 Order history & tracking
+* 🌍 Multi-language support
+* 🔔 Email / notification system
+* 📊 Advanced admin analytics dashboard
+
+---
+
+## 👨‍💻 Author
+
+**Kalana Maduranga**
 Full Stack Developer
-RAD Coursework Project
+Rapid Application Development (RAD) Coursework Project
 
-📄 License
+---
 
-This project is licensed under the MIT License
+## 📄 License
+
+This project is licensed under the **MIT License**
+See the `LICENSE` file for more details.
+
+
+
+
+Just tell me 🔥
