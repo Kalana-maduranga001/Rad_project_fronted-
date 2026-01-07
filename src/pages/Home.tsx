@@ -1,6 +1,6 @@
 import { useAuth } from "../context/authContext"
 import { Link } from "react-router-dom"
-import { FiArrowRight, FiTrendingUp, FiShield, FiTruck } from "react-icons/fi"
+import { FiArrowRight } from "react-icons/fi"
 import { useState, useEffect } from "react"
 
 // Add Google Fonts
@@ -90,7 +90,7 @@ export default function Home() {
     <div className="w-full bg-gradient-to-b from-gray-50 to-white">
       
       {/* Hero Section */}
-      <section className="relative h-[700px] bg-gray-900 text-white overflow-hidden rounded-2xl mb-16 shadow-2xl">
+      <section className="relative h-[700px] bg-gray-900 text-white overflow-hidden rounded-2xl mb-16 shadow-2xl mx-6">
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-50"
           style={{
@@ -118,14 +118,15 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Features with Background Video */}
-      <section className="relative rounded-3xl overflow-hidden mb-20">
-        {/* Background Video/Image */}
+      {/* Features with Background */}
+      <section className="relative rounded-3xl overflow-hidden mb-20 mx-6">
+        {/* Background Image */}
         <div className="absolute inset-0">
           <img
             src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=1600&h=600&fit=crop"
             alt="Background"
             className="w-full h-full object-cover"
+            loading="lazy"
           />
           <div className="absolute inset-0 bg-white/90 backdrop-blur-sm" />
         </div>
@@ -143,6 +144,7 @@ export default function Home() {
                   src={feature.image}
                   alt={feature.title}
                   className="w-full h-full object-cover"
+                  loading="lazy"
                 />
               </div>
 
@@ -167,6 +169,72 @@ export default function Home() {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Collections - WITH SLIDESHOW */}
+      <section className="mb-20 mx-6">
+        <div className="text-center mb-12">
+          <div className="inline-block px-6 py-2 bg-gray-800 rounded-full mb-4">
+            <span className="text-white font-semibold text-sm uppercase tracking-wider">Collections</span>
+          </div>
+          <h2 className="text-5xl md:text-6xl font-bold text-gray-800 mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>
+            Shop by Collection
+          </h2>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto" style={{ fontFamily: "'Inter', sans-serif" }}>
+            Find the perfect pieces for every occasion
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {collections.map((collection, index) => (
+            <CollectionCard key={index} collection={collection} />
+          ))}
+        </div>
+      </section>
+
+      {/* CTA Section with Glassmorphism */}
+      <section className="relative rounded-3xl overflow-hidden shadow-2xl mx-6 mb-20">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: "url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1600&h=600&fit=crop')"
+          }}
+        />
+        
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900/90 via-gray-800/85 to-black/90" />
+        
+        {/* Glassmorphism Card */}
+        <div className="relative z-10 backdrop-blur-xl bg-white/5 border border-white/10 rounded-3xl p-16 m-8 shadow-2xl">
+          {/* Decorative Elements */}
+          <div className="absolute top-0 left-0 w-32 h-32 bg-white/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-0 w-40 h-40 bg-white/5 rounded-full blur-3xl" />
+          
+          <div className="relative z-10 text-center">
+            <h2 className="text-5xl md:text-6xl font-bold mb-6 text-white" style={{ fontFamily: "'Playfair Display', serif" }}>
+              Join Our Style Community
+            </h2>
+            <p className="text-xl md:text-2xl mb-10 text-gray-200 max-w-3xl mx-auto" style={{ fontFamily: "'Inter', sans-serif" }}>
+              Subscribe to get exclusive deals and early access to new collections
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-xl mx-auto">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="flex-1 px-6 py-4 rounded-full text-gray-900 text-lg bg-white/90 backdrop-blur-sm focus:outline-none focus:ring-4 focus:ring-white/30 focus:bg-white shadow-lg border border-white/20 placeholder:text-gray-500"
+              />
+              <button className="bg-white/90 backdrop-blur-sm text-gray-900 px-10 py-4 rounded-full font-bold hover:bg-white transition-all transform hover:scale-105 shadow-xl border border-white/30">
+                Subscribe
+              </button>
+            </div>
+            
+            <p className="text-gray-300 text-sm mt-6 flex items-center justify-center gap-2" style={{ fontFamily: "'Inter', sans-serif" }}>
+              <span className="text-2xl">✨</span> Get 15% off your first order
+            </p>
+          </div>
         </div>
       </section>
 
@@ -243,72 +311,6 @@ export default function Home() {
         }
       `}</style>
 
-      {/* Collections - WITH SLIDESHOW */}
-      <section className="mb-20">
-        <div className="text-center mb-12">
-          <div className="inline-block px-6 py-2 bg-gray-800 rounded-full mb-4">
-            <span className="text-white font-semibold text-sm uppercase tracking-wider">Collections</span>
-          </div>
-          <h2 className="text-5xl md:text-6xl font-bold text-gray-800 mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>
-            Shop by Collection
-          </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto" style={{ fontFamily: "'Inter', sans-serif" }}>
-            Find the perfect pieces for every occasion
-          </p>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {collections.map((collection, index) => (
-            <CollectionCard key={index} collection={collection} />
-          ))}
-        </div>
-      </section>
-
-      {/* CTA Section with Glassmorphism */}
-      <section className="relative rounded-3xl overflow-hidden shadow-2xl">
-        {/* Background Image */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: "url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1600&h=600&fit=crop')"
-          }}
-        />
-        
-        {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900/90 via-gray-800/85 to-black/90" />
-        
-        {/* Glassmorphism Card */}
-        <div className="relative z-10 backdrop-blur-xl bg-white/5 border border-white/10 rounded-3xl p-16 m-8 shadow-2xl">
-          {/* Decorative Elements */}
-          <div className="absolute top-0 left-0 w-32 h-32 bg-white/5 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-0 w-40 h-40 bg-white/5 rounded-full blur-3xl" />
-          
-          <div className="relative z-10 text-center">
-            <h2 className="text-5xl md:text-6xl font-bold mb-6 text-white" style={{ fontFamily: "'Playfair Display', serif" }}>
-              Join Our Style Community
-            </h2>
-            <p className="text-xl md:text-2xl mb-10 text-gray-200 max-w-3xl mx-auto" style={{ fontFamily: "'Inter', sans-serif" }}>
-              Subscribe to get exclusive deals and early access to new collections
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-xl mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-6 py-4 rounded-full text-gray-900 text-lg bg-white/90 backdrop-blur-sm focus:outline-none focus:ring-4 focus:ring-white/30 focus:bg-white shadow-lg border border-white/20 placeholder:text-gray-500"
-              />
-              <button className="bg-white/90 backdrop-blur-sm text-gray-900 px-10 py-4 rounded-full font-bold hover:bg-white transition-all transform hover:scale-105 shadow-xl border border-white/30">
-                Subscribe
-              </button>
-            </div>
-            
-            <p className="text-gray-300 text-sm mt-6 flex items-center justify-center gap-2" style={{ fontFamily: "'Inter', sans-serif" }}>
-              <span className="text-2xl">✨</span> Get 15% off your first order
-            </p>
-          </div>
-        </div>
-      </section>
-
     </div>
   )
 }
@@ -335,6 +337,7 @@ function CollectionCard({ collection }: { collection: { title: string; images: s
         src={collection.images[currentImage]}
         alt={collection.title}
         className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+        loading="lazy"
       />
       
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
