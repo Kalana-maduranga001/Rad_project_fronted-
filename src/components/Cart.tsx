@@ -54,7 +54,7 @@ export default function CartDrawer({ open, onClose }: Props) {
 
                 <div className="flex-1">
                   <h3 className="font-semibold">
-                    {item.product.title}
+                    {item.product.title} {item.selectedSize && `(Size: ${item.selectedSize})`}
                   </h3>
                   <p className="text-sm">
                     Rs. {item.product.price}

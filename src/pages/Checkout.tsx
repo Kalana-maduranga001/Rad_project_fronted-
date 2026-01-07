@@ -53,12 +53,17 @@ export default function Checkout() {
       //   totalAmount: total
       // }
 
-      const orderPayload = {
-        items: cart.map(item => ({
-          productId: item.product._id,
-          quantity: item.quantity
-        }))
-      }
+  const orderPayload = {
+    items: cart.map(item => ({
+      productId: item.product._id,
+      quantity: item.quantity,
+      size: item.selectedSize, // ✅ FIXED
+      price: item.product.price,
+    })),
+    shippingInfo,
+    paymentMethod,
+    totalAmount: total
+  }
 
       await createOrder(orderPayload)
 
@@ -100,36 +105,38 @@ export default function Checkout() {
           <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
 
           <div className="border rounded-lg p-4 space-y-4">
-            {cart.map(item => (
-              <div key={item.product._id} className="flex gap-4 items-center">
-                <img
-                  src={item.product.imageUrls[0]}
-                  className="w-20 h-20 object-cover rounded"
-                />
+          {cart.map(item => (
+            <div key={`${item.product._id}-${item.selectedSize}`} className="flex gap-4 items-center">
+              <img
+                src={item.product.imageUrls[0]}
+                className="w-20 h-20 object-cover rounded"
+              />
 
-                <div className="flex-1">
-                  <h3 className="font-semibold">{item.product.title}</h3>
-                  <p>Rs. {item.product.price}</p>
-                </div>
-
-                <input
-                  type="number"
-                  min={1}
-                  value={item.quantity}
-                  onChange={e =>
-                    updateQuantity(item.product._id, Number(e.target.value))
-                  }
-                  className="w-16 border px-2 py-1 rounded"
-                />
-
-                <button
-                  onClick={() => removeFromCart(item.product._id)}
-                  className="text-red-600"
-                >
-                  Remove
-                </button>
+              <div className="flex-1">
+                <h3 className="font-semibold">
+                  {item.product.title} {item.selectedSize && `(Size: ${item.selectedSize})`}
+                </h3>
+                <p>Rs. {item.product.price}</p>
               </div>
-            ))}
+
+              <input
+                type="number"
+                min={1}
+                value={item.quantity}
+                onChange={e =>
+                  updateQuantity(item.product._id, Number(e.target.value), item.selectedSize)
+                }
+                className="w-16 border px-2 py-1 rounded"
+              />
+
+              <button
+                onClick={() => removeFromCart(item.product._id, item.selectedSize)}
+                className="text-red-600"
+              >
+                Remove
+              </button>
+            </div>
+          ))}
 
             <div className="text-right font-bold text-xl">
               Total: Rs. {total}

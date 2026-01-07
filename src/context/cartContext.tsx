@@ -4,13 +4,14 @@ import type { ProductType } from "../services/product"
 export type CartItem = {
   product: ProductType
   quantity: number
+  selectedSize?: string
 }
 
 type CartContextType = {
   cart: CartItem[]
-  addToCart: (product: ProductType, quantity: number) => void
-  removeFromCart: (productId: string) => void
-  updateQuantity: (productId: string, quantity: number) => void
+  addToCart: (product: ProductType, quantity: number, selectedSize?: string) => void
+  removeFromCart: (productId: string, selectedSize?: string) => void
+  updateQuantity: (productId: string, quantity: number, selectedSize?: string) => void
   clearCart: () => void
 }
 
@@ -35,34 +36,39 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     localStorage.setItem("cart", JSON.stringify(cart))
   }, [cart, hasLoaded])
 
-  const addToCart = (product: ProductType, quantity: number) => {
-    setCart((prev) => {
+  // cartContext.tsx
+  const addToCart = (product: ProductType, quantity: number, selectedSize?: string) => {
+    setCart(prev => {
       const existing = prev.find(
-        (item) => item.product._id === product._id
+        item =>
+          item.product._id === product._id &&
+          item.selectedSize === selectedSize
       )
 
       if (existing) {
-        return prev.map((item) =>
-          item.product._id === product._id
+        return prev.map(item =>
+          item.product._id === product._id && item.selectedSize === selectedSize
             ? { ...item, quantity: item.quantity + quantity }
             : item
         )
       }
 
-      return [...prev, { product, quantity }]
+      return [...prev, { product, quantity, selectedSize }]
     })
   }
 
-  const removeFromCart = (productId: string) => {
-    setCart((prev) =>
-      prev.filter((item) => item.product._id !== productId)
+  const removeFromCart = (productId: string, selectedSize?: string) => {
+    setCart(prev =>
+      prev.filter(
+        item => item.product._id !== productId || item.selectedSize !== selectedSize
+      )
     )
   }
 
-  const updateQuantity = (productId: string, quantity: number) => {
-    setCart((prev) =>
-      prev.map((item) =>
-        item.product._id === productId
+  const updateQuantity = (productId: string, quantity: number, selectedSize?: string) => {
+    setCart(prev =>
+      prev.map(item =>
+        item.product._id === productId && item.selectedSize === selectedSize
           ? { ...item, quantity }
           : item
       )

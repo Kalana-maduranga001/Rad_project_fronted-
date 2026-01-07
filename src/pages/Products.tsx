@@ -27,11 +27,21 @@ export default function Products() {
   const [activeImage, setActiveImage] = useState(0)
   const [quantity, setQuantity] = useState(1)
 
+  const [selectedSize, setSelectedSize] = useState("")
+
   const { addToCart } = useCart()
 
   useEffect(() => {
     loadProducts()
   }, [search, gender, category, minPrice, maxPrice, sortBy])
+
+  useEffect(() => {
+    if (selectedProduct) {
+      setActiveImage(0)
+      setQuantity(1)
+      setSelectedSize("") // reset size
+    }
+  }, [selectedProduct])
 
   const loadProducts = async () => {
     setLoading(true)
@@ -234,11 +244,44 @@ export default function Products() {
                   Rs. {selectedProduct.price}
                 </p>
                 <p>{selectedProduct.description}</p>
-                <p><strong>Size:</strong> {selectedProduct.size}</p>
+
+                {/* SIZE SELECTOR */}
+                {selectedProduct.sizes && selectedProduct.sizes.length > 0 && (
+                  <div>
+                    <label className="font-semibold mr-2">Size:</label>
+                    <select
+                      className="border px-2 py-1 rounded"
+                      value={selectedSize}
+                      onChange={(e) => setSelectedSize(e.target.value)}
+                    >
+                      <option value="">Select size</option>
+                      {selectedProduct.sizes.map((size) => (
+                        <option key={size} value={size}>
+                          {size}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+
+                <div className="flex items-center gap-4 mt-2">
+                  <label className="font-semibold">Quantity:</label>
+                  <input
+                    type="number"
+                    min={1}
+                    className="border px-2 py-1 w-16 rounded"
+                    value={quantity}
+                    onChange={(e) => setQuantity(Number(e.target.value))}
+                  />
+                </div>
 
                 <button
                   onClick={() => {
-                    addToCart(selectedProduct, quantity)
+                    if (!selectedSize) {
+                      alert("Please select a size")
+                      return
+                    }
+                    addToCart(selectedProduct, quantity, selectedSize) // pass size
                     setSelectedProduct(null)
                   }}
                   className="mt-4 bg-black text-white py-3 rounded"

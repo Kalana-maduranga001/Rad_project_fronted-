@@ -34,7 +34,7 @@ export default function AdminProducts() {
     description: "",
     category: "" as Category | "",
     gender: "" as Gender | "",
-    size: "",
+    sizes: "" , // <-- changed from `size`
     price: "",
     stock: "",
   })
@@ -60,10 +60,23 @@ export default function AdminProducts() {
 
   const buildFormData = (includeImages = true) => {
     const fd = new FormData()
-    Object.entries(form).forEach(([k, v]) => fd.append(k, v))
+    
+    fd.append("title", form.title)
+    fd.append("description", form.description)
+    fd.append("category", form.category)
+    fd.append("gender", form.gender)
+    
+    // Convert sizes string to array
+    const sizesArray = form.sizes.split(",").map(s => s.trim()).filter(Boolean)
+    sizesArray.forEach(size => fd.append("sizes", size))
+    
+    fd.append("price", form.price)
+    fd.append("stock", form.stock)
+
     if (includeImages && images) {
       Array.from(images).forEach((img) => fd.append("images", img))
     }
+    
     return fd
   }
 
@@ -81,7 +94,7 @@ export default function AdminProducts() {
         description: "",
         category: "",
         gender: "",
-        size: "",
+        sizes: "",
         price: "",
         stock: "",
       })
@@ -107,7 +120,7 @@ export default function AdminProducts() {
       description: p.description || "",
       category: p.category,
       gender: p.gender,
-      size: p.size,
+      sizes: p.sizes.join(","), // <-- join array into string
       price: String(p.price),
       stock: String(p.stock),
     })
@@ -266,10 +279,10 @@ export default function AdminProducts() {
 
             <input
               className="border p-2 w-full"
-              placeholder="Size"
-              value={form.size}
+              placeholder="Sizes (comma separated, e.g. S,M,L,XL)"
+              value={form.sizes}
               onChange={(e) =>
-                setForm({ ...form, size: e.target.value })
+                setForm({ ...form, sizes: e.target.value })
               }
             />
 

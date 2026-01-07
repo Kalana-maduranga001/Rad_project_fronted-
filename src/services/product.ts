@@ -18,13 +18,14 @@ export const CATEGORIES: Category[] = [
   "OFFICEWEAR",
 ]
 
+// Updated ProductType to have multiple sizes
 export type ProductType = {
   _id: string
   title: string
   description?: string
   gender: Gender
   category: Category
-  size: string
+  sizes: string[]   // <-- changed from 'size: string'
   price: number
   stock: number
   imageUrls: string[]

@@ -132,7 +132,11 @@ export default function AdminOrders() {
               <h3 className="font-semibold mb-2">Products</h3>
               {order.products.map((p: any) => (
                 <p key={p._id}>
-                  {p.title} × {p.quantity}
+                  {p.title}
+                  {p.size && (
+                    <span className="text-gray-600"> (Size: {p.size})</span>
+                  )}{" "}
+                  × {p.quantity}
                 </p>
               ))}
             </div>
@@ -205,6 +209,9 @@ export default function AdminOrders() {
                     <p className="font-semibold">{item.title}</p>
                     <p className="text-sm text-gray-600">
                       Qty: {item.quantity}
+                      {item.size && (
+                        <> • Size: <span className="font-medium">{item.size}</span></>
+                      )}
                     </p>
                   </div>
                   <p>Rs. {item.price * item.quantity}</p>
