@@ -1,73 +1,109 @@
-# React + TypeScript + Vite
+👕 Clothing Brand Store – Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive e-commerce frontend for a clothing brand, built using React + TypeScript as part of the Rapid Application Development (RAD) coursework.
+The application focuses on product discovery, size selection, cart management, and a smooth shopping experience.
 
-Currently, two official plugins are available:
+🌟 Features
+User Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Modern landing page with brand-focused UI
 
-## React Compiler
+Product listing with categories & gender filters
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Product size selection (S, M, L, XL, etc.)
 
-## Expanding the ESLint configuration
+Add to cart & cart management
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+User authentication (login & register)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Order placement workflow
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Responsive design (mobile, tablet & desktop)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Admin Features
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+View all orders in admin dashboard
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Order status management
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Product and inventory visibility
+
+🛠️ Technologies Used
+
+React 18 with TypeScript
+
+Vite – fast build & development tool
+
+Tailwind CSS – utility-first styling
+
+Redux Toolkit – global state management
+
+React Router v6 – client-side routing
+
+Axios – API communication
+
+ESLint & Prettier – code quality
+
+📸 Screenshots
+
+Home Page – Featured clothing collections
+
+Products Page – Category & size-based browsing
+
+Cart Page – Selected items and checkout preview
+
+Authentication – Login & Register pages
+
+Admin Orders Dashboard
+
+(Add screenshots in GitHub for better presentation)
+
+🚀 Setup & Run Instructions
+1️⃣ Clone the repository
+git clone https://github.com/Kalana-maduranga001/Rad_project_fronted-.git
+cd Rad_project_fronted-
+
+2️⃣ Install dependencies
+npm install
+
+3️⃣ Configure environment variables
+
+Create a .env file in the root directory:
+
+VITE_API_URL=http://localhost:5000/api
+
+4️⃣ Start development server
+npm run dev
+
+
+📍 Frontend will be available at:
+http://localhost:5173
+
+📁 Project Structure
+src/
+ ├── components/        # Reusable UI components
+ ├── pages/             # Page-level components
+ ├── redux/             # Redux slices & store
+ ├── services/          # API service files
+ ├── context/           # Cart & auth context
+ ├── assets/            # Images & static files
+ ├── App.tsx
+ └── main.tsx
+
+📌 Notes
+
+This frontend consumes REST APIs from the Clothing Store backend
+
+State management handled using Redux Toolkit
+
+Fully responsive and scalable UI architecture
+
+👨‍💻 Author
+
+Kalana Maduranga
+Full Stack Developer
+RAD Coursework Project
+
+📄 License
+
+This project is licensed under the MIT License
