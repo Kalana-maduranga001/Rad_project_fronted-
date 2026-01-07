@@ -1,6 +1,6 @@
 import { useAuth } from "../context/authContext"
 import { Link } from "react-router-dom"
-import { FiArrowRight, FiPackage, FiShield, FiTrendingUp, FiStar } from "react-icons/fi"
+import { FiArrowRight, FiPackage, FiShield, FiTrendingUp, FiStar, FiShoppingBag, FiCheck, FiUsers, FiAward, FiZap } from "react-icons/fi"
 import { useState, useEffect } from "react"
 
 // Add Google Fonts
@@ -240,6 +240,18 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ==================== CREATOR TOOLKIT SECTION ==================== */}
+      <CreatorToolkitSection />
+
+      {/* ==================== AMBASSADORS SECTION ==================== */}
+      <AmbassadorsSection />
+
+      {/* ==================== MEMBERSHIP PROGRAM SECTION ==================== */}
+      <MembershipSection />
+
+      {/* ==================== MANUFACTURING SOLUTIONS SECTION ==================== */}
+      <ManufacturingSection />
+
       {/* CTA Section - Glassmorphism Premium */}
       <section className="relative py-24 bg-black">
         <div className="max-w-7xl mx-auto px-6">
@@ -462,6 +474,483 @@ export default function Home() {
       `}</style>
 
     </div>
+  )
+}
+
+// ==================== CREATOR TOOLKIT SECTION ====================
+function CreatorToolkitSection() {
+  const tools = [
+    {
+      icon: <FiPackage className="w-12 h-12" />,
+      title: "Design Tools",
+      description: "3D digital design helps brands design and sample clothing faster and with less waste.",
+      image: "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&h=600&fit=crop",
+      features: ["3D Modeling", "Pattern Making", "Virtual Sampling"]
+    },
+    {
+      icon: <FiTrendingUp className="w-12 h-12" />,
+      title: "Manufacturing Tools",
+      description: "Sourcing the best factories to produce products on-demand, sent directly to consumers.",
+      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=600&fit=crop",
+      features: ["On-Demand Production", "Quality Control", "Drop Shipping"]
+    },
+    {
+      icon: <FiShoppingBag className="w-12 h-12" />,
+      title: "Marketing & Distribution",
+      description: "Hyper-realistic 3D digital product images for e-commerce and marketing campaigns.",
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
+      features: ["Product Photography", "Social Media", "E-commerce Integration"]
+    }
+  ]
+
+  return (
+    <section className="relative py-24 bg-gradient-to-b from-gray-900 to-black text-white overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
+          backgroundSize: '40px 40px'
+        }} />
+      </div>
+
+      {/* Floating Elements */}
+      <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl animate-float-slow" />
+      <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-float-delayed" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
+        {/* Section Header */}
+        <div className="text-center mb-20 animate-fade-in-up">
+          <div className="inline-block mb-4">
+            <span className="text-gray-400 text-sm uppercase tracking-widest font-semibold">Tools & Services</span>
+          </div>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6" style={{ fontFamily: "'Playfair Display', serif" }}>
+            The Creator Toolkit
+          </h2>
+          <p className="text-xl text-gray-400 max-w-3xl mx-auto" style={{ fontFamily: "'Inter', sans-serif" }}>
+            Empowering creators with cutting-edge tools for the modern fashion industry
+          </p>
+        </div>
+
+        {/* Tools Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {tools.map((tool, index) => (
+            <div
+              key={index}
+              className="group relative overflow-hidden rounded-3xl animate-fade-in-up"
+              style={{ animationDelay: `${index * 150}ms` }}
+            >
+              {/* Background Image */}
+              <div className="absolute inset-0">
+                <img
+                  src={tool.image}
+                  alt={tool.title}
+                  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/30" />
+              </div>
+
+              {/* Content */}
+              <div className="relative z-10 p-8 h-full flex flex-col justify-between min-h-[500px]">
+                {/* Icon */}
+                <div className="mb-6">
+                  <div className="w-20 h-20 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center text-white border border-white/20 transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
+                    {tool.icon}
+                  </div>
+                </div>
+
+                {/* Text Content */}
+                <div>
+                  <h3 className="text-3xl font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>
+                    {tool.title}
+                  </h3>
+                  <p className="text-gray-300 mb-6 leading-relaxed" style={{ fontFamily: "'Inter', sans-serif" }}>
+                    {tool.description}
+                  </p>
+
+                  {/* Features List */}
+                  <ul className="space-y-2">
+                    {tool.features.map((feature, idx) => (
+                      <li key={idx} className="flex items-center gap-2 text-sm text-gray-400">
+                        <FiCheck className="text-green-400" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Button */}
+                <button className="mt-6 w-full bg-white/10 backdrop-blur-md text-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-black transition-all border border-white/20 flex items-center justify-center gap-2 group-hover:gap-4">
+                  Learn More
+                  <FiArrowRight className="transition-all" />
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ==================== AMBASSADORS SECTION ====================
+function AmbassadorsSection() {
+  const ambassadors = [
+    {
+      name: "Sarah Anderson",
+      role: "Fashion Designer",
+      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&h=600&fit=crop",
+      quote: "The phygital approach allows me to explore new dimensions of creativity and cultivate stronger community bonds.",
+      social: { instagram: "#", twitter: "#" }
+    },
+    {
+      name: "Michael Chen",
+      role: "Creative Director",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=600&fit=crop",
+      quote: "This platform has revolutionized the way I bring my designs to life. The on-demand manufacturing is a game changer.",
+      social: { instagram: "#", twitter: "#" }
+    },
+    {
+      name: "Emma Rodriguez",
+      role: "Brand Strategist",
+      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600&h=600&fit=crop",
+      quote: "Being part of this community has opened doors I never imagined. The collaborative culture is truly inspiring.",
+      social: { instagram: "#", twitter: "#" }
+    }
+  ]
+
+  return (
+    <section className="relative py-24 bg-black text-white overflow-hidden">
+      {/* Animated Background */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-pink-500 rounded-full blur-3xl animate-float-slow" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500 rounded-full blur-3xl animate-float-delayed" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
+        {/* Section Header */}
+        <div className="text-center mb-20 animate-fade-in-up">
+          <div className="inline-block mb-4">
+            <span className="text-gray-400 text-sm uppercase tracking-widest font-semibold">Our Community</span>
+          </div>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6" style={{ fontFamily: "'Playfair Display', serif" }}>
+            Brand Ambassadors
+          </h2>
+          <p className="text-xl text-gray-400 max-w-3xl mx-auto" style={{ fontFamily: "'Inter', sans-serif" }}>
+            Meet the creators shaping the future of fashion
+          </p>
+        </div>
+
+        {/* Ambassadors Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {ambassadors.map((ambassador, index) => (
+            <div
+              key={index}
+              className="group relative animate-fade-in-up"
+              style={{ animationDelay: `${index * 150}ms` }}
+            >
+              {/* Card */}
+              <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700/50 hover:border-gray-600/50 transition-all duration-500 transform hover:-translate-y-2">
+                {/* Image Container */}
+                <div className="relative h-80 overflow-hidden">
+                  <img
+                    src={ambassador.image}
+                    alt={ambassador.name}
+                    className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
+                </div>
+
+                {/* Content */}
+                <div className="p-8">
+                  <div className="flex items-center gap-2 mb-4">
+                    <FiAward className="text-yellow-400" />
+                    <span className="text-sm text-gray-400 uppercase tracking-wide">{ambassador.role}</span>
+                  </div>
+                  
+                  <h3 className="text-2xl font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>
+                    {ambassador.name}
+                  </h3>
+                  
+                  <p className="text-gray-400 italic leading-relaxed mb-6" style={{ fontFamily: "'Inter', sans-serif" }}>
+                    "{ambassador.quote}"
+                  </p>
+
+                  {/* Social Links */}
+                  <div className="flex gap-4">
+                    <a href={ambassador.social.instagram} className="text-gray-400 hover:text-white transition-colors">
+                      <FiUsers className="w-5 h-5" />
+                    </a>
+                    <a href={ambassador.social.twitter} className="text-gray-400 hover:text-white transition-colors">
+                      <FiUsers className="w-5 h-5" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ==================== MEMBERSHIP PROGRAM SECTION ====================
+function MembershipSection() {
+  const plans = [
+    {
+      name: "Starter",
+      price: "$29",
+      period: "/month",
+      description: "Perfect for emerging creators",
+      features: [
+        "Access to Design Tools",
+        "5 Products per month",
+        "Community Support",
+        "Basic Analytics",
+        "Email Support"
+      ],
+      popular: false,
+      gradient: "from-gray-700 to-gray-800"
+    },
+    {
+      name: "Professional",
+      price: "$79",
+      period: "/month",
+      description: "For established designers",
+      features: [
+        "Everything in Starter",
+        "Unlimited Products",
+        "Priority Manufacturing",
+        "Advanced Analytics",
+        "24/7 Phone Support",
+        "Marketing Tools"
+      ],
+      popular: true,
+      gradient: "from-purple-600 to-pink-600"
+    },
+    {
+      name: "Enterprise",
+      price: "$199",
+      period: "/month",
+      description: "For growing brands",
+      features: [
+        "Everything in Professional",
+        "Dedicated Account Manager",
+        "Custom Manufacturing",
+        "API Access",
+        "White-Label Solutions",
+        "Advanced Integrations"
+      ],
+      popular: false,
+      gradient: "from-blue-600 to-cyan-600"
+    }
+  ]
+
+  return (
+    <section className="relative py-24 bg-gradient-to-b from-black to-gray-900 text-white overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'linear-gradient(45deg, white 25%, transparent 25%, transparent 75%, white 75%, white), linear-gradient(45deg, white 25%, transparent 25%, transparent 75%, white 75%, white)',
+          backgroundSize: '60px 60px',
+          backgroundPosition: '0 0, 30px 30px'
+        }} />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
+        {/* Section Header */}
+        <div className="text-center mb-20 animate-fade-in-up">
+          <div className="inline-block mb-4">
+            <span className="text-gray-400 text-sm uppercase tracking-widest font-semibold">Pricing Plans</span>
+          </div>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6" style={{ fontFamily: "'Playfair Display', serif" }}>
+            Membership Program
+          </h2>
+          <p className="text-xl text-gray-400 max-w-3xl mx-auto" style={{ fontFamily: "'Inter', sans-serif" }}>
+            Choose the perfect plan to unlock your creative potential
+          </p>
+        </div>
+
+        {/* Plans Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {plans.map((plan, index) => (
+            <div
+              key={index}
+              className={`relative animate-fade-in-up ${plan.popular ? 'md:-mt-4 md:mb-4' : ''}`}
+              style={{ animationDelay: `${index * 150}ms` }}
+            >
+              {/* Popular Badge */}
+              {plan.popular && (
+                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-20">
+                  <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg">
+                    Most Popular
+                  </div>
+                </div>
+              )}
+
+              {/* Card */}
+              <div className={`relative overflow-hidden rounded-3xl ${plan.popular ? 'border-2 border-purple-500/50' : 'border border-gray-700/50'} bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm hover:border-gray-600/50 transition-all duration-500 transform hover:-translate-y-2 h-full`}>
+                {/* Gradient Overlay */}
+                <div className={`absolute top-0 left-0 right-0 h-32 bg-gradient-to-br ${plan.gradient} opacity-20`} />
+
+                <div className="relative z-10 p-8">
+                  {/* Plan Name */}
+                  <h3 className="text-2xl font-bold mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>
+                    {plan.name}
+                  </h3>
+                  <p className="text-gray-400 text-sm mb-6" style={{ fontFamily: "'Inter', sans-serif" }}>
+                    {plan.description}
+                  </p>
+
+                  {/* Price */}
+                  <div className="mb-8">
+                    <span className="text-5xl font-bold" style={{ fontFamily: "'Playfair Display', serif" }}>
+                      {plan.price}
+                    </span>
+                    <span className="text-gray-400 text-lg">{plan.period}</span>
+                  </div>
+
+                  {/* Features */}
+                  <ul className="space-y-4 mb-8">
+                    {plan.features.map((feature, idx) => (
+                      <li key={idx} className="flex items-start gap-3 text-gray-300">
+                        <FiCheck className="text-green-400 mt-1 flex-shrink-0" />
+                        <span className="text-sm" style={{ fontFamily: "'Inter', sans-serif" }}>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* Button */}
+                  <button className={`w-full py-4 rounded-full font-bold transition-all transform hover:scale-105 ${
+                    plan.popular 
+                      ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:shadow-2xl hover:shadow-purple-500/50' 
+                      : 'bg-white/10 text-white hover:bg-white hover:text-black border border-white/20'
+                  }`}>
+                    Get Started
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ==================== MANUFACTURING SOLUTIONS SECTION ====================
+function ManufacturingSection() {
+  const [activeTab, setActiveTab] = useState(0)
+
+  const solutions = [
+    {
+      title: "Bespoke Manufacturing",
+      description: "Custom production solutions tailored to your unique requirements with premium quality control.",
+      image: "https://images.unsplash.com/photo-1565688534245-05d6b5be184a?w=800&h=600&fit=crop",
+      features: ["Custom Patterns", "Premium Materials", "Expert Craftsmanship", "Small Batch Production"]
+    },
+    {
+      title: "On-Demand Production",
+      description: "Sustainable manufacturing powered by cutting-edge technology, producing only what's needed.",
+      image: "https://images.unsplash.com/photo-1516384903227-139a8cf0ec21?w=800&h=600&fit=crop",
+      features: ["Zero Waste", "Fast Turnaround", "Global Shipping", "Inventory-Free"]
+    },
+    {
+      title: "Distribution Network",
+      description: "Comprehensive distribution solutions connecting your products to customers worldwide.",
+      image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&h=600&fit=crop",
+      features: ["E-commerce Integration", "Wholesale Solutions", "Retail Partnerships", "Direct-to-Consumer"]
+    }
+  ]
+
+  return (
+    <section className="relative py-24 bg-gray-900 text-white overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'repeating-linear-gradient(45deg, white 0px, white 1px, transparent 1px, transparent 10px)',
+        }} />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
+        {/* Section Header */}
+        <div className="text-center mb-16 animate-fade-in-up">
+          <div className="inline-block mb-4">
+            <span className="text-gray-400 text-sm uppercase tracking-widest font-semibold">Production & Distribution</span>
+          </div>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6" style={{ fontFamily: "'Playfair Display', serif" }}>
+            Manufacturing Solutions
+          </h2>
+          <p className="text-xl text-gray-400 max-w-3xl mx-auto" style={{ fontFamily: "'Inter', sans-serif" }}>
+            From concept to customer: Complete production and distribution services
+          </p>
+        </div>
+
+        {/* Tab Navigation */}
+        <div className="flex flex-wrap justify-center gap-4 mb-12">
+          {solutions.map((solution, index) => (
+            <button
+              key={index}
+              onClick={() => setActiveTab(index)}
+              className={`px-8 py-4 rounded-full font-semibold transition-all ${
+                activeTab === index
+                  ? 'bg-white text-black shadow-xl'
+                  : 'bg-white/10 text-white hover:bg-white/20 border border-white/20'
+              }`}
+            >
+              {solution.title}
+            </button>
+          ))}
+        </div>
+
+        {/* Content Display */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Image Side */}
+          <div className="relative overflow-hidden rounded-3xl animate-fade-in-up">
+            <img
+              src={solutions[activeTab].image}
+              alt={solutions[activeTab].title}
+              className="w-full h-[500px] object-cover"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+            
+            {/* Icon Badge */}
+            <div className="absolute top-6 left-6 w-16 h-16 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/20">
+              <FiZap className="w-8 h-8 text-white" />
+            </div>
+          </div>
+
+          {/* Text Side */}
+          <div className="animate-fade-in-up animation-delay-200">
+            <h3 className="text-4xl font-bold mb-6" style={{ fontFamily: "'Playfair Display', serif" }}>
+              {solutions[activeTab].title}
+            </h3>
+            <p className="text-xl text-gray-300 mb-8 leading-relaxed" style={{ fontFamily: "'Inter', sans-serif" }}>
+              {solutions[activeTab].description}
+            </p>
+
+            {/* Features Grid */}
+            <div className="grid grid-cols-2 gap-4 mb-8">
+              {solutions[activeTab].features.map((feature, idx) => (
+                <div key={idx} className="flex items-center gap-3 bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10">
+                  <FiCheck className="text-green-400 flex-shrink-0" />
+                  <span className="text-sm text-gray-300">{feature}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* CTA Button */}
+            <button className="bg-white text-black px-8 py-4 rounded-full font-bold hover:bg-gray-200 transition-all transform hover:scale-105 flex items-center gap-3 shadow-xl group">
+              Learn More
+              <FiArrowRight className="group-hover:translate-x-2 transition-transform" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
   )
 }
 
