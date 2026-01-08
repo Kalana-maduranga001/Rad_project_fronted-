@@ -37,7 +37,7 @@ export default function Header() {
               className="text-xl md:text-2xl font-bold text-gray-900 tracking-tight hover:text-gray-700 transition-colors"
               style={{ fontFamily: "'Playfair Display', serif" }}
             >
-              Clothing Store
+              T R A D C E Y Clothing Store
             </Link>
 
             {/* Desktop Navigation */}
