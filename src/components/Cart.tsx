@@ -76,7 +76,8 @@ export default function CartDrawer({ open, onClose }: Props) {
                         e.stopPropagation()
                         updateQuantity(
                           item.product._id,
-                          Math.max(1, item.quantity - 1)
+                          Math.max(1, item.quantity - 1),
+                          item.selectedSize
                         )
                       }}
                     >
@@ -89,7 +90,8 @@ export default function CartDrawer({ open, onClose }: Props) {
                         e.stopPropagation()
                         updateQuantity(
                           item.product._id,
-                          item.quantity + 1
+                          item.quantity + 1,
+                          item.selectedSize
                         )
                       }}
                     >
@@ -101,7 +103,7 @@ export default function CartDrawer({ open, onClose }: Props) {
                 <button
                   onClick={(e) => {
                     e.stopPropagation()
-                    removeFromCart(item.product._id)
+                    removeFromCart(item.product._id, item.selectedSize)
                   }}
                   className="text-red-500 hover:text-red-700 text-sm font-semibold self-start hover:bg-red-50 px-2 py-1 rounded transition-all"
                 >
