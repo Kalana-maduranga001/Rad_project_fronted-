@@ -186,7 +186,7 @@ const About: React.FC = () => {
                   </div>
                   <div className="relative overflow-hidden rounded-2xl group">
                     <img 
-                      src="https://images.unsplash.com/photo-1558769132-cb1aea1c8e90?w=400&h=500&fit=crop"
+                      src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1600&h=900&fit=crop"
                       alt="Fashion"
                       className="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-700"
                     />
